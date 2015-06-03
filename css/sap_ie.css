@@ -1,0 +1,11 @@
+@charset "utf-8";
+/* CSS Document */
+#content1{
+	height:300px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+.username_field2{
+	margin:0 30px;
+}
