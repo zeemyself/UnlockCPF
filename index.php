@@ -215,7 +215,7 @@ if($_REQUEST['txtUsername'] != ""){
                 </div>
                 <!-- Card ID  -->
                 <div class="password_field_temp" id="password_field_temp">
-                	<input name="txtPassword_temp"  class="txtPassword" type="text" size="65" onfocus="inputFocus(this)" onblur="inputBlur(this)" value=""/>
+                	<input name="txtPassword" id="txtPassword" class="txtPassword" type="text" size="65" onfocus="inputFocus(this)" onblur="inputBlur(this)" value=""/>
                 </div>
                <!--  <div class="password_field" id="password_field" style="display:none">
                 	<input name="txtPassword" id="txtPassword" class="txtPassword"  type="password" size="65" onBlur="restoreBox()"/>
@@ -287,7 +287,7 @@ if($_REQUEST['txtUsername'] != ""){
 <div id="inline3" style="display:none;">
 	<table width="379" height="107" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="40" class="alert_error" style="padding-left:30px">กรุณาระบุรหัสผ่าน iHR/Internet</td>
+        <td height="40" class="alert_error" style="padding-left:30px">กรุณาระบุID Card</td>
       </tr>
     </table>
 </div>
@@ -302,6 +302,13 @@ if($_REQUEST['txtUsername'] != ""){
 	<table width="379" height="107" border="0" cellspacing="0" cellpadding="0">
       <tr>
         <td height="40" class="alert_error" style="padding-left:30px">กรุณากรอกรหัส 5 หลักที่ท่านเห็น</td>
+      </tr>
+    </table>
+</div>
+<div id="inline12" style="display:none;">
+	<table width="379" height="107" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td height="40" class="alert_error" style="padding-left:30px">กรุณาระบุวัดเกิด</td>
       </tr>
     </table>
 </div>
