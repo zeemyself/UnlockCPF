@@ -95,13 +95,29 @@ if($_REQUEST['txtUsername'] != ""){
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+	<!-- Date Picker -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>SAP-CPFG Self Unlock/Reset Password</title>
 <link href="css/sap.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/sap_ie.css" /><![endif]-->
-<script type="text/javascript" src="fancybox/jquery-1.9.0.min.js"></script>
+<!-- <script type="text/javascript" src="fancybox/jquery-1.9.0.min.js"></script> -->
 <script type="text/javascript" src="fancybox/jquery.fancybox.js?v=2.1.4"></script>
 <link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.css?v=2.1.4" media="screen" />
+
+ 
+
+
+
+
 
 <script language="javascript">
 	
@@ -147,11 +163,11 @@ if($_REQUEST['txtUsername'] != ""){
 				$('#trigger_username').fancybox({padding:0, margin:0}).trigger('click');
 				return false;
 			}
-			if (($("#txtPassword").val().length < 1) ||  ($("#txtPassword").val()=="รหัสผ่าน iHR/Internet") ) {
+			if (($("#txtPassword").val().length != 13) ||  ($("#txtPassword").val()=="รหัสผ่าน iHR/Internet") ) {
 				$('#trigger_password').fancybox({padding:0, margin:0}).trigger('click');
 				return false;
 			}
-			if (($("#txtBirthDate").val().length < 1) ||  ($("#txtBirthDate").val()=="รหัสผ่าน iHR/Internet") ) {
+			if (($("#datepicker").val().length < 1) ||  ($("#datepicker").val()=="รหัสผ่าน iHR/Internet") ) {
 				$('#trigger_birthdate').fancybox({padding:0, margin:0}).trigger('click');
 				return false;	
 			}
@@ -220,9 +236,15 @@ if($_REQUEST['txtUsername'] != ""){
                <!--  <div class="password_field" id="password_field" style="display:none">
                 	<input name="txtPassword" id="txtPassword" class="txtPassword"  type="password" size="65" onBlur="restoreBox()"/>
                  -->
-                <div class="birthdate_field">
+               <!--  <div class="birthdate_field">
                 	<input name="txtBirthDate" id="txtBirthDate" type="text"size="50" onfocus="inputFocus(this)" onblur="inputBlur(this)" value=""/>
+                </div> -->
+                <div class="birthdate_field">
+              <input name=txtBirthDate type="text" id="datepicker">
                 </div>
+ 
+
+
             </div>
 
             </div>
@@ -233,6 +255,7 @@ if($_REQUEST['txtUsername'] != ""){
         	<div class="submit_ldap"><a style="cursor:pointer;" id="login_link"><img src="images/submit.png" width="101" height="38" style="cursor:pointer" border="0" /></a></div>
            
         </div>
+
      </form>
      <? 
  	}else{
@@ -287,7 +310,7 @@ if($_REQUEST['txtUsername'] != ""){
 <div id="inline3" style="display:none;">
 	<table width="379" height="107" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td height="40" class="alert_error" style="padding-left:30px">กรุณาระบุID Card</td>
+        <td height="40" class="alert_error" style="padding-left:30px">กรุณาระบุเลขบัตรประจำตัวประชาชนให้ถูกต้อง</td>
       </tr>
     </table>
 </div>

@@ -206,7 +206,7 @@ body{
 	background-color:transparent;
 	color: #064d8f;
 }
-#txtBirthDate{
+#datepicker{
 	height:32px;
 	font-size:15pt;
 	width:300px;
