@@ -26,11 +26,13 @@ if($_REQUEST['txtUsername'] != ""){
 		}
 		$users = $_REQUEST['txtUsername'];
 		$users = strtoupper($users); 
-		$strSQL = "SELECT * FROM SMARTCR.VIEW_SR_USER_IHR WHERE  OPERATION_ID LIKE '%".$users."%'";
+		$strSQL = "SELECT * FROM SMARTCR.VIEW_SR_USER WHERE  OPERATION_ID LIKE '%".$users."%'";
 		
 		$stid = oci_parse($conn, $strSQL);
 		$st_exe = oci_execute($stid,OCI_DEFAULT);
 		$row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS);
+		var_dump($row);
+		exit();
 	//	echo "<script>alert('$row[OPERATION_ID]');</script>";
 		$_SESSION['user'] = $users;
 		$_SESSION['username'] = $users;
@@ -163,7 +165,7 @@ if($_REQUEST['txtUsername'] != ""){
 				$('#trigger_username').fancybox({padding:0, margin:0}).trigger('click');
 				return false;
 			}
-			if (($("#txtPassword").val().length != 13) ||  ($("#txtPassword").val()=="รหัสผ่าน iHR/Internet") ) {
+			if (($("#txtPassword").val().length <1) ||  ($("#txtPassword").val()=="รหัสผ่าน iHR/Internet") ) {
 				$('#trigger_password').fancybox({padding:0, margin:0}).trigger('click');
 				return false;
 			}
