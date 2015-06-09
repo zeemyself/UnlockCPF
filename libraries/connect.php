@@ -1,14 +1,9 @@
 <?php
-/*
-$host= "192.168.71.184";
-$dbuser= "sapunlock";
-$dbpass= "sapunlock#uat";
-$dbname =  "SAPCPFGUAT";
-*/
-$host= "192.168.185.197:3379";	
-$dbuser= "sapcpfg";	
-$dbpass= "sKslrpe#ws23";
-$dbname =  "SAPCPFGPRD";	
+
+$host= "192.168.166.179:3306";	
+$dbuser= "adss";	
+$dbpass= "password@1";
+$dbname =  "adssdev";	
 
 $link = mysql_connect($host, $dbuser, $dbpass);
 mysql_select_db($dbname);

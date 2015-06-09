@@ -81,7 +81,7 @@ class adLDAP {
     * @var array
     */
     //protected $_domain_controllers = array ("svr-cpfdc01.cpf.co.th","192.168.1.9");
-	protected $_domain_controllers = array ("192.168.1.171","192.168.1.9");
+	protected $_domain_controllers = array ("192.168.1.171");
 	
     /**
     * Optional account with higher privileges for searching
@@ -110,7 +110,7 @@ class adLDAP {
     * 
     * @var bool
     */
-	protected $_use_ssl=false;
+	protected $_use_ssl=true;
     
     /**
     * Use TLS
@@ -118,7 +118,7 @@ class adLDAP {
     * 
     * @var bool
     */
-    protected $_use_tls=false;
+    protected $_use_tls=true;
     
     /**
     * When querying group memberships, do it recursively 
@@ -1231,6 +1231,7 @@ class adLDAP {
     * @param bool $isGUID Is the username passed a GUID or a samAccountName
     * @return bool
     */
+	
     public function user_modify($username,$attributes,$isGUID=false){
         if ($username===NULL){ return ("Missing compulsory field [username]"); }
         if (array_key_exists("password",$attributes) && !$this->_use_ssl){ 
@@ -1284,6 +1285,7 @@ class adLDAP {
     * @param bool $isGUID Is the username passed a GUID or a samAccountName
     * @return bool
     */
+	
     public function user_enable($username,$isGUID=false){
         if ($username===NULL){ return ("Missing compulsory field [username]"); }
         $attributes=array("enabled"=>1);
@@ -1305,9 +1307,12 @@ class adLDAP {
         if ($username===NULL){ return (false); }
         if ($password===NULL){ return (false); }
         if (!$this->_bind){ return (false); }
-        if (!$this->_use_ssl && !$this->_use_tls){ 
+        /*if (!$this->_use_ssl && !$this->_use_tls){ 
+			
             throw new adLDAPException('SSL must be configured on your webserver and enabled in the class to set passwords.');
+			
         }
+		*/
         
         $user_dn=$this->user_dn($username,$isGUID);
         if ($user_dn===false){ return (false); }

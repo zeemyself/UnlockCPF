@@ -7,7 +7,7 @@ session_start();
 include ("libraries/cfg/cfg.inc.php");
 include ("libraries/class/adLDAP.php");
 
-if($_REQUEST['txtUsername'] != ""){			
+/*if($_REQUEST['txtUsername'] != ""){			
 	try {
 		$adldap = new adLDAP();
 	}catch (adLDAPException $e) {
@@ -19,30 +19,74 @@ if($_REQUEST['txtUsername'] != ""){
 		$_SESSION["login"] = true;
 		$_SESSION["needLogin"] = false;
 		//echo "<script>alert('test');</script>";
+		*/
+	if($_REQUEST['txtUsername'] != ""){
+		$conn = oci_connect('VOXTRONS', 'ksdew#kdlo13', 'SPSI');
 		
-		$conn = oci_connect('HRUSER', 'husr#smc79', 'SPSI');
-		if($conn){
-			//echo "<script>alert('test2');</script>";
-		}
+		 //var_dump($_POST);
 		$users = $_REQUEST['txtUsername'];
+		$idnum = $_REQUEST['txtPassword'];
+		$datepick = $_REQUEST['txtBirthDate'];
+		$date = str_replace("/","-","$datepick");
 		$users = strtoupper($users); 
-		$strSQL = "SELECT * FROM SMARTCR.VIEW_SR_USER WHERE  OPERATION_ID LIKE '%".$users."%'";
 		
+		$strSQL = "SELECT * FROM SMARTCR.VIEW_SR_USER WHERE  USER_ID = '$users' and ID_NO = $idnum and BIRTH_DATE = '$date'";
+		//  echo $strSQL."<br>";
+		//  var_dump()
+		//  echo $users;
+		//  echo $idnum;
+		// var_dump($date);
+		//exit();
 		$stid = oci_parse($conn, $strSQL);
 		$st_exe = oci_execute($stid,OCI_DEFAULT);
+		$num_row = oci_num_rows($stid);
+		// var_dump($num_row);
+		// exit();
 		$row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS);
-		var_dump($row);
-		exit();
+		// var_dump($row);
+		// exit();
+		if($row['LAST_NAME_LOCAL'] != null){
+			$_SESSION["login"] = true;
+		 	$_SESSION["needLogin"] = false;
+		}
+		else{
+			$loginsucess = false;
+			$failCause = $loginFailAlert[3];
+			echo "<script>alert('$failCause');window.location='index.php'</script>";
+			break;
+		}
+		//exit();
+		//exit();
+		//$datepick = $_REQUEST['datepicker'];
+		//$date = str_replace("/","-","$datepick");
+		//echo "<script> alert($date);</script>";
+		// if($conn){
+		// 	if(strtoupper($users) == $row['USER_ID'] && $_REQUEST['txtPassword'] == $row['ID_NO'] && $_REQUEST['datepicker'] == $row['BIRTH_DATE']){
+		// 	$_SESSION["login"] = true;
+		// 	$_SESSION["needLogin"] = false;
+		// 	echo "YEs";
+		// 	}
+		// 	else
+		// 		$loginsucess = false;
+		// }
+
+		// var_dump($row);
+		// exit();
 	//	echo "<script>alert('$row[OPERATION_ID]');</script>";
 		$_SESSION['user'] = $users;
 		$_SESSION['username'] = $users;
 		$_SESSION['password'] = $_REQUEST['txtPassword'];
+		$_SESSION['prefix'] = $row['PREFIX_NAME_LOCAL'];
 		$_SESSION['firstname'] = $row['FIRST_NAME_LOCAL'];
 		$_SESSION['lastname'] = $row['LAST_NAME_LOCAL'];
-		$_SESSION['fullname'] = $row['FIRST_NAME_LOCAL']." ".$row['LAST_NAME_LOCAL'];
+		$_SESSION['fullname'] = $row['PREFIX_NAME_LOCAL']." ".$row['FIRST_NAME_LOCAL']." ".$row['LAST_NAME_LOCAL'];
 		$_SESSION['department'] = $row['BUSINESS_AREA_DESC'];
 		$_SESSION['company'] = $row['COMPANY_DESC'];
-		$_SESSION['title'] = $row['POSITION_DESC160'];
+		$_SESSION['birthdate'] = $row['BIRTH_DATE'];
+		$_SESSION['mobile'] = $row['MOBILE_NO'];
+		$_SESSION['email'] = $row['CPF_INTERNET_EMAIL'];
+		$_SESSION['title'] = $row['POSITION_DESC'];
+		$_SESSION['id'] = $row['ID_NO'];
 		$user_detail = "คุณ".$_SESSION['fullname']." หน่วยงาน ".$_SESSION['department']." ตำแหน่ง ".$_SESSION['title']." บริษัท ".$_SESSION['company'];
 		$_SESSION['user_detail'] = $user_detail;
 		$loginsucess = true;
@@ -50,6 +94,20 @@ if($_REQUEST['txtUsername'] != ""){
 		$_SESSION['todaydate'] = $todaydate;
 		$timenow = date("H:i:s");
 		$_SESSION['timenow'] = $timenow;
+		// var_dump($_SESSION['id']);
+		// exit();
+		// if(check($_SESSION['user'],$_SESSION['id'],$_SESSION['birthdate'])){
+		// 	$_SESSION["login"] = true;
+		// 	$_SESSION["needLogin"] = false;
+		// 	// echo "<script>alert('Login successs');window.location='index.php'</script>";
+		// }
+		// else{
+		// 	$loginsucess = false;
+		// 	$failCause = $loginFailAlert[1];
+		// 	echo "<script>alert('$failCause');window.location='index.php'</script>";
+		// 	break;
+		// }
+
 		include "libraries/connect.php";
 		$sql_trans_perday = "SELECT * FROM log_web WHERE User_Name_Ldap='$users' AND Logon_Date='$todaydate' AND Result='Success'";
 		//echo $sql_trans_perday;
@@ -64,8 +122,8 @@ if($_REQUEST['txtUsername'] != ""){
 			$_SESSION['log_id'] = mysql_insert_id();
 			echo "<meta http-equiv=\"refresh\" content=\"0;URL='index.php'\">";
 		}
-		
-	}else{ 
+	}	
+	/*}else{ 
 		//##### Login fail #####
 		$loginsucess = false;
 		if($adldap -> authenticate($operator_adUser,$operator_adPassword,true)){
@@ -91,7 +149,25 @@ if($_REQUEST['txtUsername'] != ""){
 		}	
 		echo "<script>alert('$failCause');window.location='index.php'</script>";			
 	}				
+}*/
+
+function check($id,$card,$day){
+	$d = $_REQUEST['datepicker'];
+	$id = strtolower($id); 
+	if($id != $_REQUEST['txtUsername'])
+		return false;
+	if($card != $_REQUEST['txtPassword'])
+		return false;
+	if($day != str_replace("/", "-", $d))
+		return false;
+	return true;
 }
+
+
+
+
+
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -204,10 +280,10 @@ if($_REQUEST['txtUsername'] != ""){
 <body>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/sap_logo.png" width="101" height="51" /></div>
+      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
       <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
       <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
-      <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div>
+     <!--  <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
      
     </div>
     <div class="header_bar"></div>
@@ -242,7 +318,7 @@ if($_REQUEST['txtUsername'] != ""){
                 	<input name="txtBirthDate" id="txtBirthDate" type="text"size="50" onfocus="inputFocus(this)" onblur="inputBlur(this)" value=""/>
                 </div> -->
                 <div class="birthdate_field">
-              <input name=txtBirthDate type="text" id="datepicker">
+              <input name="txtBirthDate" type="text" id="datepicker">
                 </div>
  
 
@@ -274,9 +350,9 @@ if($_REQUEST['txtUsername'] != ""){
           </tr>
           <tr height="40">
             <td></td>
-            <td class="ldap_name" valign="bottom"><?=$_SESSION['department'];?></td>
+            <td class="ldap_name" valign="bottom"><?=$_SESSION['email'];?></td>
             <td></td>
-            <td class="ldap_name" valign="bottom"><?=$_SESSION['company'];?></td>
+            <td class="ldap_name" valign="bottom"><?=$_SESSION['mobile'];?></td>
           </tr>
         </table>
         <div id="btn">

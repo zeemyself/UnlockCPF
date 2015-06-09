@@ -34,10 +34,10 @@ echo "<script>window.location='index.php'</script>";
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/sap_logo.png" width="101" height="51" /></div>
+      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
       <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
       <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
-      <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div>
+     <!--  <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
     </div>
     <div class="header_bar"></div>
     <div id="nav"><img src="images/nav4_over.png" width="835" height="46" usemap="#Map" border="0" />

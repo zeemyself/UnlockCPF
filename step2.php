@@ -2,7 +2,7 @@
 //echo $_SESSION[log_id];
 
 //print_r($_SESSION)
-if(!isset($_SESSION['username'])||!isset($_SESSION['password'])){
+if(!$_SESSION["login"]){
 echo "<script>window.location='index.php'</script>";
 }
 ?>
@@ -28,10 +28,11 @@ echo "<script>window.location='index.php'</script>";
 		if(keycode == '13'){
 			IsEmpty();
 		}
+		//alert("555");
 	});
 	function IsEmpty(){ 
 		//CHECK EMPTY USERTYPE
-		var usertype = "";
+		/*var usertype = "";
 		var len = document.step2.usertype.length;
 		var i;
 		for (i = 0; i < len; i++) {
@@ -40,11 +41,11 @@ echo "<script>window.location='index.php'</script>";
 				break;
 			}
 		}
-		if (usertype==""){
-			$('#trigger_usertype').fancybox({padding:0, margin:0}).trigger('click');
-			//alert('กรุณาเลือกประเภทผู้ใ้ช้งาน');
-			return false;
-		}
+		// if (usertype==""){
+		// 	$('#trigger_usertype').fancybox({padding:0, margin:0}).trigger('click');
+		// 	//alert('กรุณาเลือกประเภทผู้ใ้ช้งาน');
+		// 	return false;
+		// }
 		//CHECK EMPTY USER PURPOSE
 		var user_purpose = "";
 		var len2 = document.step2.user_purpose.length;
@@ -70,11 +71,26 @@ echo "<script>window.location='index.php'</script>";
 				break;
 			}
 		}
-		if (worktype==""){
+		// if (worktype==""){
+		// 	$('#trigger_worktype').fancybox({padding:0, margin:0}).trigger('click');
+		// 	//alert('กรุณาระบุระบบงาน');
+		// 	return false;
+		// }
+		*/
+		var user_purpose="";
+		
+		for(i=0 ;i<2 ; i++){
+			if(document.step2.user_purpose[i].checked){
+				user_purpose=i;
+				break;
+			}
+		}
+		if(user_purpose ===""){
 			$('#trigger_worktype').fancybox({padding:0, margin:0}).trigger('click');
-			//alert('กรุณาระบุระบบงาน');
+			alert('กรุณาระบุความต้องการ');
 			return false;
 		}
+		<?$_SESSION["type"] = user_purpose;?>
 		document.step2.submit();
 		$("#loader").show();
 	}
@@ -95,10 +111,10 @@ echo "<script>window.location='index.php'</script>";
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/sap_logo.png" width="101" height="51" /></div>
+      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
       <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
       <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
-      <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div>
+      <!-- <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
      
     </div>
     <div class="header_bar"></div>
@@ -117,7 +133,7 @@ echo "<script>window.location='index.php'</script>";
     <div id="content2">
     <form name="step2" action="step3.php" method="post">
     	<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
-          <tr>
+        <!--   <tr>
           	<td width="17" height="80"></td>
             <td width="193" class="usertype">เลือกประเภทผู้ใช้งาน</td>
             <td width="25"><input name="usertype"  type="radio" value="1" <? if($_SESSION['usertype']=='1'||$_SESSION['usertype']=='g'){echo "checked";} ?> /></td>
@@ -127,7 +143,7 @@ echo "<script>window.location='index.php'</script>";
           </tr>
           <tr>
             <td colspan="6" height="4" style="background-image:url(images/line.png); background-repeat:no-repeat"></td>
-          </tr>
+           --></tr>
           <tr>
           	<td height="80">&nbsp;</td>
             <td class="usertype">ระบุความต้องการ</td>
@@ -136,7 +152,7 @@ echo "<script>window.location='index.php'</script>";
             <td><input name="user_purpose" type="radio" value="2" <? if($_SESSION['user_purpose_ss']=='2'){echo "checked";} ?>/></td>
             <td  class="usertype2">ขอรหัสผ่านใหม่</td>
           </tr>
-          <tr>
+         <!--  <tr>
             <td colspan="6" height="4" style="background-image:url(images/line.png); background-repeat:no-repeat"></td>
           </tr>
           <tr>
@@ -146,7 +162,7 @@ echo "<script>window.location='index.php'</script>";
             <td  class="usertype2">ระบบ SAP-ECC6</td>
             <td><input name="worktype" type="radio" value="2" <? if($_SESSION['worktype']=='2'){echo "checked";} ?>/></td>
             <td  class="usertype2">ระบบ SAP BW</td>
-          </tr>
+          </tr> -->
         </table>
     </form>
     	<div id="btn2">
@@ -162,9 +178,9 @@ echo "<script>window.location='index.php'</script>";
         <area shape="rect" coords="420,0,607,46" href="javascript:void(0)" />
         <area shape="rect" coords="632,-4,835,44" href="javascript:void(0)" />
       </map>
-<a class="fancybox" id="trigger_usertype" href="#inline4"></a>
+<!-- <a class="fancybox" id="trigger_usertype" href="#inline4"></a> -->
 <a class="fancybox" id="trigger_purpose" href="#inline5"></a>
-<a class="fancybox" id="trigger_worktype" href="#inline6"></a>
+<!-- <a class="fancybox" id="trigger_worktype" href="#inline6"></a> -->
 <div id="inline4" style="display:none;">
 	<table width="379" height="107" border="0" cellspacing="0" cellpadding="0">
       <tr>

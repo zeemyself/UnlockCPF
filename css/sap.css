@@ -259,7 +259,7 @@ body{
 .inline1{
 	background-image:url(../images/bg_detail.png);
 	background-repeat:no-repeat;
-	background-position:0 15px;
+	background-position:3 15px;
 }
 .ldap_name{
 	color:#074497;
@@ -446,4 +446,7 @@ padding-top:20px;
 	background-image:url(../images/fgt_box2.png);
 	background-repeat:no-repeat;
 	position:absolute;
+}
+.im-centered{
+	margin: auto; max-width: 300px;
 }

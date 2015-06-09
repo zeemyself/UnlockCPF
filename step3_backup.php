@@ -4,14 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>SAP-CPFG Self Unlock/Reset Password</title>
 <link href="css/sap.css" rel="stylesheet" type="text/css" />
@@ -88,17 +80,6 @@
 		$("#loader").show();
 			return false;
 		}
-	function next(){
-		// Send the email or SMS
-		alert("Password send");
-		<?php
-			$to      = $_SESSION['email'];
-			$subject = 'Test repass';
-			$message = 'retsamtab hello';
-			$headers = 'From: adss@cpf.co.th' . "\r\n" .'Reply-To: swas.kun@cpmail.in.th' . "\r\n" .'X-Mailer: PHP/' . phpversion();
-			mail($to, $subject, $message, $headers);
-?>
-	}
 </script>
 </head>
 <body>
@@ -114,7 +95,7 @@
 	}
 	else{
 		//print_r($_SESSION);
-		if(!$_SESSION["login"]){
+		if(!isset($_SESSION['username'])||!isset($_SESSION['password'])){
 			echo "<script>window.location='index.php'</script>";
 		}
 		if(isset($_POST['user_purpose'])){
@@ -156,10 +137,10 @@
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
+      <div class="sap_logo" align="right"><img src="images/sap_logo.png" width="101" height="51" /></div>
       <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
       <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
-     <!--  <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
+      <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div>
      
     </div>
     <div class="header_bar"></div>
@@ -179,52 +160,14 @@
     <div id =general_user>
       <div class="title">
                     <div style="width:200px;display:inline" class="usertype">โปรดระบุช่องทาง</div>
-                   
+                    <!-- <div style="width:300px;display:inline" class="usertype2">ระบุข้อมูล User ID SAP</div> -->
                     <div style="clear:both"></div>
                 </div>
-</div>
+    </div>
 
   
-  		<!-- <td class="worksys">Email</td>
-  		<td width="104" align="center"><input type="radio" name="opsys_client" id="radio" value="Email" /><?echo $_SESSION['email']?></td>
-  		<br>
-  		<td class="worksys">SMS</td>
-  		<td width="104" align="center"><input type="radio" name="opsys_client" id="radio2" value="SMS" /><?echo $_SESSION['mobile']?></td>
-  		<br> -->
-  		<div class="im-centered">
-<!-- <div class="container" align ="center"> -->
-<div class="row">
-    <div class="col-lg-12">
-    	
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox" size ="20" aria-label="..." name= "type" checked>By Email</button> 
-      </span>
-      <input type="text" class="form-control" style="width:200px;" placeholder="<?echo $_SESSION['email']?>" readonly >
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-
-  <!-- <br><br> -->
-  	<div class="col-lg-12">
-    <div class="input-group">
-      <span class="input-group-addon">
-        <input type="checkbox" size ="20" aria-label="..." name = "type" checked>By SMS&nbsp</button>
-      </span>
-      <input type="text" class="form-control" style="width:200px;"  placeholder="<?echo $_SESSION['mobile']?>" readonly>
-      	
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
-</div> <!-- Container -->	
-  	<!-- </div> -->
-
-  	<div id="btn3">
-                <div class="cancel_sap"><a id="other_login"><img src="images/cancel_btn.png" border="0" width="118" height="44" style="cursor:pointer" /></a></div>
-                <div class="submit"><a onclick="javascript:next();"><img src="images/next_btn.png" width="118" height="44" border="0" style="cursor:pointer"/></a></div>
-            </div>
-  	
    
-  
+  <? } ?>
   <div id="footer3"><div class="copyright">Copyright @ 2013 by CPF</div></div>
 </div>
 <map name="Map" id="Map">
