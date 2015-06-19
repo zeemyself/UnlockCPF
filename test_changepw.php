@@ -1,8 +1,6 @@
 ﻿
 <?php
 
-
-
 include ("libraries/cfg/cfg.inc.php");
 include ("libraries/class/adLDAP.php");
 
@@ -12,34 +10,50 @@ include ("libraries/class/adLDAP.php");
 	}catch (adLDAPException $e) {
 		echo $e; exit();   
 	}
+
 	
-	
-	$adldap -> connect();
-	if($adldap -> authenticate("wisanu.sys","golf@339")){
-	
-		if($adldap -> user_enable("wisanu.dis")){
-			echo "Enable user success.";
-		}
-		
-		$newpw = generateStrongPassword();
-		echo $newpw."<BR>";
-		var_dump($adldap -> user_password("wisanu.dis",$newpw));
-		/*if($adldap -> user_password("wisanu.dis",$newpw)){
-			
-			echo "reset password success.".$newpw;
-		}else{
-		
-			echo "reset password fail.".$newpw;
-		}
-		*/
-		
-		echo "<BR>";
-		echo "End<BR>";
-	
-	
+	/*
+	if (!ini_get('display_errors')) {
+		ini_set('display_errors', '1');
 	}
 	
 	
+	if($adldap -> connect()){
+		echo "1. Connected<BR>";
+		
+		if($adldap -> authenticate()){
+		
+			echo "2. Authentication Success <BR>";
+		
+			if($adldap -> user_enable("wisanu.dis")){
+				echo "Enable user success.<BR>";
+			}
+			else{
+				echo "Enable user Failed.<BR>";
+			}
+		}else{
+	
+			echo "2. Authentication Failed <BR>";
+			
+		}
+
+	}
+
+
+	
+	$newpw = generateStrongPassword();
+	echo "New Password:".$newpw."<BR>";
+		
+	// var_dump($adldap -> user_password("wisanu.dis",$newpw));
+		if($adldap -> user_password("wisanu.dis",$newpw)){
+			
+			echo "reset password success.";
+		}else{
+		
+			echo "reset password fail.";
+		}
+	
+		echo "<BR>";
 	
 	function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds'){
 		$sets = array();
@@ -79,10 +93,5 @@ include ("libraries/class/adLDAP.php");
 		$dash_str .= $password;
 		return $dash_str;
 	}
-	
-	
-	
-	
-
-
+	*/
 ?>

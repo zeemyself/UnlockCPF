@@ -1,0 +1,455 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	background-image: url(../images/bg.jpg);
+	background-repeat: repeat-x;
+	background-color: #e1e3e4;
+}
+
+@font-face {
+    font-family: supermarket;
+    src: url(font/supermarket.ttf) format("truetype");
+}
+@font-face {
+    font-family: supermarket;
+    src: url(font/supermarket.eot);
+}
+
+#header {
+	margin: 0 auto;
+	position:relative;
+	width:900px;
+	height:92px;
+}
+#nav{
+	margin: 36px auto;
+	position:relative;
+	width:900px;
+	height:50px;
+	padding-left:63px;
+}
+#footer {
+	margin: 0 auto;
+	position:relative;
+	width:900px;
+	height:74px;
+	padding-right:50px;
+}
+#footer3 {
+	margin: 0 auto;
+	position:relative;
+	width:900px;
+	height:20px;
+	padding-right:50px;
+}
+
+.copyright{
+	float:right;
+	font-family:Arial;
+	color:#777777;
+	font-size:10px
+}
+#container{
+	width:100%;
+	height:122px;
+	
+}
+#content1{
+	height:230px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+#content2{
+	height:350px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+#content3{
+	height:340px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+#content4{
+	height:510px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+#content5{
+	height:220px;
+	width:900px;
+	margin:0 auto;
+	position:relative;
+}
+.header_bar{
+	width:839px;
+	height:3px;
+	margin:auto auto;
+	position:relative;
+	background-image:url(../images/header_bar.png);
+	background-repeat:repeat-x;
+	display:block;
+}
+.nav_line{
+	width:550px;
+	height:3px;
+	margin:auto auto;
+	position:relative;
+	background-image:url(../images/header_bar.png);
+	background-repeat:repeat-x;
+	display:block;
+}
+.sap_logo{
+	width:140px;
+	height:92px;
+	position:relative;
+	float:left;
+	margin-top:35px;
+}
+.sap_title{
+	width:577px;
+	height:92px;
+	position:relative;
+	float:left;
+	margin-top:43px;
+}
+.unlock_logo{
+	width:90px;
+	height:92px;
+	position:relative;
+	float:left;
+	margin-top:43px;
+}
+.cpf_logo{
+	width:85px;
+	height:92px;
+	position:relative;
+	float:left;login_ldap2
+	margin-top:35px;
+}
+.login_ldap{
+	margin:79px auto;
+	height:110px;
+	width:680px;
+	background-image:url(../images/login_bg.png);
+	background-repeat:no-repeat;
+	position:relative;
+}
+.login_ldap2{
+	margin-left:350px;
+	margin-top:30px;
+	height:139px;
+	width:359px;
+	background-image:url(../images/bg_login_hr.png);
+	background-repeat:no-repeat;
+	position:absolute;
+}
+.text_ihr{
+	height:68px;
+	width:164px;
+	background-image:url(../images/txt_login.png);
+	background-repeat:no-repeat;
+	position:absolute;
+	margin-left:150px;
+	margin-top:50px;
+}
+.login_sap{
+	margin:20px auto;
+	height:110px;
+	width:550px;
+	background-image:url(../images/login_bg2.png);
+	background-repeat:no-repeat;
+	position:relative;
+}
+
+.submit_ldap{
+	position:absolute;
+
+	width:101px;
+	height:10px;
+	margin:230px 600px;
+	/*padding-top:50px;*/
+	z-index:1;
+}
+.txt_login{
+	width:449px;
+	position:relative;
+	float:left;
+}
+.username_field{
+	margin:16px 30px;
+}
+.username_field2{
+	margin:-5px 30px;
+}
+.password_field{
+	margin:-5px 30px;
+}
+.password_field_temp{
+	margin:-5px 30px;
+}
+.password_field_temp2{
+	margin:10px 30px;
+}
+.birthdate_field{
+	margin:20px 30px;
+}
+#txtUsername{
+	height:32px;
+	font-size:15pt;
+	width:300px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+}
+#datepicker{
+	height:32px;
+	font-size:15pt;
+	width:300px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+}
+#txtUsername_sap{
+	height:30px;
+	font-size:15pt;
+	width:490px;
+	border-color:transparent;
+	background-color:transparent;
+	margin-top:-2px;
+	color: #064d8f;
+}
+.txtPassword{
+	height:32px;
+	font-size:15pt;
+	width:300px;
+	margin-top:1px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+}
+#txtUsername_sap2{
+	height:30px;
+	font-size:15pt;
+	width:310px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+	margin:0 0;
+}
+.txtPassword2{
+	height:32px;
+	font-size:15pt;
+	width:230px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+}
+
+#inline1{
+	margin:50px auto;
+	height:220px;
+	width:684px;
+	position:relative;
+}
+.inline1{
+	background-image:url(../images/bg_detail.png);
+	background-repeat:no-repeat;
+	background-position:3 15px;
+}
+.ldap_name{
+	color:#074497;
+	font-family:tahoma;
+	font-size:14px;
+}
+
+#btn{
+	position:relative;
+	width:684px;
+	margin:80px auto;
+	clear:both;
+}
+.cancel{
+	position:relative;
+	margin:0 0;
+	width:359px;
+	display:inline;
+	padding-left:200px;
+	
+}
+.submit{
+	position:relative;
+	margin:0 0;
+	width:325px;
+	display:inline;
+	padding-left:30px;
+}
+.usertype{
+color:#28669e;
+font-family:supermarket;
+font-size:20px;
+}
+.usertype2{
+color:#616161;
+font-family:supermarket;
+font-size:20px;
+}
+#btn2{
+	position:relative;
+	width:684px;
+	margin:40px auto;
+	clear:both;
+}
+.cancel_sap{
+	position:relative;
+	margin:0 0;
+	width:359px;
+	display:inline;
+	padding-left:150px;
+	
+}
+.title{
+width:300px;
+margin:0 auto;
+position:relative;
+padding-top:20px;
+}
+#btn3{
+	position:relative;
+	width:550px;
+	margin:60px auto;
+	clear:both;
+}
+.sap_user{
+	width:839px;
+	position:relative;
+}
+.login_sap2{
+	width: 350px;
+	position: relative;
+	display: inline;
+	float: left;
+	margin: 20px 50px;
+}
+.worktype2{
+	width:350px;
+	position:relative;
+	display:inline;
+	float:right;
+	margin:20px 0;
+}
+.title2{
+	width:460px;
+	height:60px;
+	margin:0 20px;
+	position:relative;	
+}
+.title2{
+	width: 300px;
+	height: 40px;
+	margin: 0 20px;
+	position: relative;
+}
+.login2{
+	width:460px;
+	height:150px;
+	margin:20px 0;
+	position:relative;
+	padding-top:20px;
+	background-image:url(../images/bg_login.png);
+	background-repeat:no-repeat;
+}
+.worksys{
+	color:#616161;
+	font-family:supermarket;
+	font-size:18px;
+}
+.worksys2{
+	color:#919ca7;
+	font-family:supermarket;
+	font-size:16px;
+}
+.response{
+	width:549px;
+	height:107px;
+	background-image:url(../images/bg_alert.png);
+	background-repeat:no-repeat;
+	position:relative;
+	margin:70px auto;
+}
+.result{
+	color:#1e76af;
+	font-family:tahoma;
+	font-size:15px;
+	font-weight:bold;
+}
+.result_detail{
+	color:#616161;
+	font-family:tahoma;
+	font-size:15px;
+}
+#inline2,#inline3,#inline4,#inline5,#inline6,#inline7,#inline8,#inline9,#inline10,#inline11,#inline12{
+	background-image:url(../images/bg_alert.png);
+	background-repeat:no-repeat;
+	width:549px;
+	height:107px;
+}
+.alert_error{
+	color:#ef0b0b;
+	font-family:tahoma;
+	font-size:15px;
+	font-weight:bold;
+	
+}
+.capt_chaa{
+	position:absolute;
+	margin-top:200px;
+	
+}
+.capt_txt{
+	position:absolute;
+	margin-top:-10px;
+	margin-left:577px;
+	
+}
+.capt{
+	height:19px;
+	font-size:10pt;
+	width:120px;
+	border-color:transparent;
+	background-color:transparent;
+	color: #064d8f;
+}
+.logout{
+	position:absolute;
+	margin-top:-13px;
+	margin-left:568px;
+}
+.txt_login2{
+	height:140px;
+	width:164px;
+	background-image:url(../images/fgt_log.png);
+	background-repeat:no-repeat;
+	position:absolute;
+	margin-left:200px;
+	margin-top:30px;
+}
+.fgt_box{
+	margin-left:350px;
+	margin-top:30px;
+	height:200px;
+	width:370px;
+	background-image:url(../images/fgt_box2.png);
+	background-repeat:no-repeat;
+	position:absolute;
+}
+.im-centered{
+	margin: auto; max-width: 300px;
+}
+span.tab{
+    padding: 0 210px; /* Or desired space*/
+}

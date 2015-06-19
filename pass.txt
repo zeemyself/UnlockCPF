@@ -1,0 +1,22 @@
+vm-cpt-phpdev01.cpf.co.th
+\\vm-cpt-phpdev01.cpf.co.th\adss$
+
+database:  192.168.166.179:3306
+user:adss
+password:password@1
+
+wisanu.tec
+password@1
+1559900091845
+06/10/1986
+
+g_web(Logon_Date,Logon_Time,User_Name_Ldap,Requirement,Result) VALUES('2015-06-12','10:29:46','WISANU.TEC','','Success')
+_web(Logon_Date,Logon_Time,User_Name_Ldap,Requirement,Result) VALUES('2015-06-12','10:32:44','WISANU.TEC','','Success')
+Logon_Date,Logon_Time,User_Name_Ldap,Requirement,Result) VALUES('2015-06-12','10:34:15','WISANU.TEC','','Success')
+eb(Logon_Date,Logon_Time,User_Name_Ldap,Requirement,Result) VALUES('2015-06-12','10:34:15','WISANU.TEC','Unlock','Success')
+??????? 1
+ALTER TABLE log_web MODIFY COLUMN log_id INT UNSIGNED AUTO_INCREMENT;
+ALTER TABLE log_web
+ ADD daty date
+ALTER TABLE log_web DROP COLUMN daty
+select * from log_web

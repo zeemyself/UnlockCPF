@@ -1,0 +1,229 @@
+h4{
+    margin:0 !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+div[data-role="page"] {
+    background: #EDF5FC;
+}
+
+#storename {
+    text-align: center;
+    margin: 0;
+}
+
+ #header1{
+          background-color: #ffa07a;
+          color: #ffffff;
+          margin-right: 0%;
+       }
+        #header-title{
+          background-color: #ffa07a;
+          color: #ffffff;
+       }
+
+    .ui-page-theme-a .ui-btn, html .ui-bar-a .ui-btn, html .ui-body-a .ui-btn, html body .ui-group-theme-a .ui-btn, html head + body .ui-btn.ui-btn-a, .ui-page-theme-a .ui-btn:visited, html .ui-bar-a .ui-btn:visited, html .ui-body-a .ui-btn:visited, html body .ui-group-theme-a .ui-btn:visited, html head + body .ui-btn.ui-btn-a:visited {
+      background-color: #ffd9c9;
+      border-color: #ffb394;
+
+         }
+    .ui-page-theme-a .ui-btn:hover, html .ui-bar-a .ui-btn:hover, html .ui-body-a .ui-btn:hover, html body .ui-group-theme-a .ui-btn:hover, html head + body .ui-btn.ui-btn-a:hover {
+      background-color: #ffcfbc; 
+      border-color: #ffb394;
+
+    }
+             .ui-bar-a, .ui-page-theme-a .ui-bar-inherit, html .ui-bar-a .ui-bar-inherit, html .ui-body-a .ui-bar-inherit, html body .ui-group-theme-a .ui-bar-inherit {
+       border-color: rgba(255,255,255,0); 
+             }
+             .menu{
+                   
+             }
+             #mainContent{
+                 -webkit-box-shadow: 1px 2px 2px -1px rgba(122,122,122,1);
+                 -moz-box-shadow: 1px 2px 2px -1px rgba(122,122,122,1);
+                box-shadow: 1px 2px 2px -1px rgba(122,122,122,1);
+                 border-radius: 2px;
+             }
+
+#panel-store-logo {
+    margin: 0 auto;
+    width: 174px;
+    height: 125px;
+}
+
+#left-panel .panle-title {
+    margin: 0 auto;
+}
+
+#header-toolbar {
+    /*height: 75px;*/
+    background: #ffffff;
+    border-top: 5px solid;
+    border-top-color: #0088bb;
+    border-bottom: 1px solid;
+    border-bottom-color: #0088bb;
+}
+
+    #header-toolbar a {
+        text-decoration: none;
+    }
+
+#header-toolbar-left {
+    height: 100%;
+}
+
+#header-toolbar-sslogo {
+    border: none;
+    background-color: #ffffff;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+}
+
+#header-toolbar-menu {
+    border: none;
+    background-color: #ffffff;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    padding: 0;
+    vertical-align: middle;
+    display: inline-block;
+    margin-top: -55px;
+    margin-left: 10px;
+}
+
+#header-toolbar-right {
+    /*width: 400px;*/
+    text-align: left;
+    margin-left: 5px;
+    margin-right: 5px;
+    float: right;
+    margin-top: -62px;
+}
+
+    #header-toolbar-right ul {
+        list-style-type: none;
+        margin: 0;
+    }
+
+        #header-toolbar-right ul li {
+            display: inline;
+        }
+
+#header-toolbar .ui-title {
+    font-size: 28px;
+}
+
+#header-toolbar-homeico img {
+    margin-top: 17px;
+    margin-right: 20px;
+    float: left;
+}
+
+#header-toolbar-search {
+    height: 31px;
+    width: 205px;
+    padding-left: 10px;
+}
+
+#header-toolbar-btn-serach {
+    height: 16px;
+    margin-top: 6px;
+}
+
+
+#panel-store-listview li a {
+    background: white !important;
+}
+
+    #panel-store-listview li a:hover {
+        background: #f6f6f6 !important;
+    }
+
+
+.ui-btn {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-shadow: none;
+}
+
+
+#content {
+    color: #333;
+    background: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECAgICAgICAgICAgMDAwMDAwMDAwP/2wBDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAoAAIDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYJ/8QAFwEBAQEBAAAAAAAAAAAAAAAAAAUEBv/aAAwDAQACEAMQAAAB2nv81TY6QA//xAAWEAADAAAAAAAAAAAAAAAAAAAEFSD/2gAIAQEAAQUCTgT/AP/EABgRAAIDAAAAAAAAAAAAAAAAAAEEFSBS/9oACAEDAQE/AYhDAr//xAAXEQADAQAAAAAAAAAAAAAAAAAEFCBS/9oACAECAQE/AXydT//EABgQAAIDAAAAAAAAAAAAAAAAAAEgM6HR/9oACAEBAAY/AoBWL//EABUQAQEAAAAAAAAAAAAAAAAAACDx/9oACAEBAAE/IYpP/9oADAMBAAIAAwAAABBf/wD/xAAXEQADAQAAAAAAAAAAAAAAAAABINHw/9oACAEDAQE/EMQi/wD/xAAVEQEBAAAAAAAAAAAAAAAAAAAgYf/aAAgBAgEBPxCo/wD/xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAE/ECp//9k=') /*img/bg.jpg*/ repeat-x #ECF5FC;
+}
+
+#footer-toolbar {
+    background: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQECAgICAgICAgICAgMDAwMDAwMDAwP/2wBDAQEBAQEBAQIBAQICAgECAgMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwP/wgARCAAoAAIDAREAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAYJ/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAQF/9oADAMBAAIQAxAAAAHdK3LqotQAf//EABYQAAMAAAAAAAAAAAAAAAAAAAUVIP/aAAgBAQABBQJMOn//xAAYEQACAwAAAAAAAAAAAAAAAAABBRUgUv/aAAgBAwEBPwGHX4Ff/8QAFxEAAwEAAAAAAAAAAAAAAAAABBUgUv/aAAgBAgEBPwFgVqf/xAAYEAACAwAAAAAAAAAAAAAAAAABIDOh0f/aAAgBAQAGPwKAVi//xAAUEAEAAAAAAAAAAAAAAAAAAAAg/9oACAEBAAE/ITZ//9oADAMBAAIAAwAAABCgAf/EABcRAAMBAAAAAAAAAAAAAAAAAAEg0fD/2gAIAQMBAT8QxCL/AP/EABURAQEAAAAAAAAAAAAAAAAAACBh/9oACAECAQE/EKz/AP/EABcQAAMBAAAAAAAAAAAAAAAAACBhkfH/2gAIAQEAAT8Qy6Yf/9k=') /*img/bg-footer.jpg*/ repeat-x white;
+    border-top: 1px solid #0088BB;
+}
+
+
+.ui-loader-background {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: none;
+    position: fixed;
+    z-index: 100;
+}
+
+.box-form {
+    background: white;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    border-bottom: 5px #0088BB solid;
+    border-top: 1px solid rgba(136, 136, 136, 0.10);
+    border-left: 1px solid rgba(136, 136, 136, 0.10);
+    border-right: 1px solid rgba(136, 136, 136, 0.10);
+}
+
+#lstLang {
+    margin-top: -55px;
+    margin-left: 20px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.ui-popup.ui-content {
+    background-color: white;
+}
+
+.header-resposive {
+    float: left;
+    width: 30%;
+}
+
+
+@media screen and (max-width: 560px) {
+    #header-toolbar-left {
+        text-align: center;
+        height: 100%;
+    }
+
+    #header-toolbar-right {
+        text-align: center;
+        margin-left: 0;
+        margin-right: 0;
+        float: none;
+        margin-top: 0;
+    }
+}

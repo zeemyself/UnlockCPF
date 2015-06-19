@@ -1,0 +1,30 @@
+ Id                = admin
+ Key               = 9999999999
+ From              = TEST
+ Destination       = TAS_Line_Manager
+ Text Message      = test from dev
+ ScheduledDelivery = 
+ Option            = 1
+ Sending...
+
+ Result : <MessageReturn><id>0</id><Sender>TEST</Sender><Phone>0863560600,0840254075</Phone><Code>Success</Code><Name>Success</Name><Description /></MessageReturn>
+ Id                = admin
+ Key               = 9999999999
+ From              = TAS
+ Destination       = TAS_Line_Manager
+ Text Message      = test from dev
+ ScheduledDelivery = 
+ Option            = 1
+ Sending...
+
+ Result : <MessageReturn><id>0</id><Sender>TAS</Sender><Phone>0863560600,0840254075</Phone><Code>Success</Code><Name>Success</Name><Description /></MessageReturn>
+ Id                = admin
+ Key               = 9999999999
+ From              = TAS
+ Destination       = TAS_Line_Manager
+ Text Message      = test from dev
+ ScheduledDelivery = 
+ Option            = 1
+ Sending...
+
+ Result : <MessageReturn><id>0</id><Sender>TAS</Sender><Phone>0863560600,0840254075,0848022404</Phone><Code>Success</Code><Name>Success</Name><Description /></MessageReturn>

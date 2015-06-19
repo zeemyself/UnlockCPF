@@ -1,9 +1,16 @@
-<? session_start();
-//echo $_SESSION[log_id];
-
+<? 
+session_start();
+include ("libraries/cfg/cfg.inc.php");
+include ("libraries/class/adLDAP.php");
+include ("libraries/include_mail.php");
+include ("libraries/include_sms.php");
+include ("libraries/include_changepw.php");
+  
+//echo ini_get('display_errors');
+// ini_set('display_errors', '1');
 //print_r($_SESSION) 
 //echo $_SESSION['id_card'];
-if(!isset($_SESSION['username'])||!isset($_SESSION['password'])){
+if(!$_SESSION["login"]){
 echo "<script>window.location='index.php'</script>";
 }
 ?>
@@ -12,7 +19,7 @@ echo "<script>window.location='index.php'</script>";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>SAP-CPFG Self Unlock/Reset Password</title>
+<title>CPF Self Unlock/Reset Password</title>
 <link href="css/sap.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/sap_ie.css" /><![endif]-->
 <script type="text/javascript" src="fancybox/jquery-1.9.0.min.js"></script>
@@ -34,9 +41,9 @@ echo "<script>window.location='index.php'</script>";
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
-      <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
-      <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
+     <div class="sap_logo" align="right"><img src="images/cpf_logo.png"  width="51" height="51" /></div>
+      <div class="sap_title"><a href="libraries/session_system_destroy.php"><img src="images/title2.png"/></a></div>
+      <div class="unlock_logo"><img src="images/cpfit.png" width="92" height="52" /></div>
      <!--  <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
     </div>
     <div class="header_bar"></div>
@@ -54,48 +61,123 @@ echo "<script>window.location='index.php'</script>";
     	<div class="response">
     	  <table style="margin-left:30px;" width="396" border="0" cellspacing="0" cellpadding="0">
     	    <tr>
-    	      <td width="396" height="39" valign="bottom" class="result"><? if($_SESSION['msgtype']=='S'&& $_SESSION['user_purpose_ss']=='1'){echo "การขอปลดล็อครหัสผ่านเรียบร้อยแล้ว";}else if($_SESSION['msgtype']=='S'&& $_SESSION['user_purpose_ss']=='2'){echo "การขอรหัสผ่านใหม่เรียบร้อยแล้ว";}else if($_SESSION['msgtype']=='E'){echo "ไม่สามารถตรวจสอบผู้ใช้งานได้"; }?></td>
+    	      <td width="396" height="70" valign="bottom" class="result">
+              <? 
+                  //echo $_SESSION['user_purpose'];
+                  // echo $_POST['type'];
+                  // var_dump(isset($_POST['type']));
+                  if($_SESSION['user_purpose'] == 2)
+                    echo "Your account " .$_SESSION['user']." has been unlocked";
+                  else
+                    echo "New password has been sent to ".$_SESSION['email']." and ".$_SESSION['mobile'];
+                  
+
+            ?>
+          </td>
   	      </tr>
-    	    <tr>
-    	      <td height="48" valign="bottom" class="result_detail"><?=$_SESSION['message'];?></td>
-  	      </tr>
+    	   <!--  <tr>
+    	      <td height="48" valign="bottom" class="result_detail"><?=$_SESSION['mobile'];?></td>
+  	      </tr> -->
   	    </table>
     	</div>
   	</div>
-  <div id="footer"><div class="copyright">Copyright @ 2013 by CPF</div></div>
+  <div id="footer"><div class="copyright">Copyright @ 2015 by CPF</div></div>
 </div>
 <map name="Map" id="Map">
         <area shape="rect" coords="1,1,189,51" href="index.php" />
         <area shape="rect" coords="208,-1,397,46" href="step2.php" />
+        <?
+         if($_SESSION['user_purpose'] == 2){
+        ?>
         <area shape="rect" coords="420,0,607,46" href="step3.php" />
+        <? }
+        else {
+        ?>
+        <area shape="rect" coords="420,0,607,46" href="javascript:void(0)" />
+        <? } 
+        ?>
         <area shape="rect" coords="632,-4,835,44" href="javascript:void(0)" />
 </map>
-<?
-include "libraries/connect.php";
+<?php
 
-if($_SESSION['opsys_client']=='1'){$client = "DV1-200";}
-else if($_SESSION['opsys_client']=='2'){$client = "DV1-210";}
-else if($_SESSION['opsys_client']=='3'){$client = "DV1-220";}
-else if($_SESSION['opsys_client']=='4'){$client = "DV1-230";}
-else if($_SESSION['opsys_client']=='5'){$client = "DV1-240";}
-else if($_SESSION['opsys_client']=='6'){$client = "QA1-300";}
-else if($_SESSION['opsys_client']=='7'){$client = "TR1-800";}
-else if($_SESSION['opsys_client']=='8'){$client = "PR1-555";}
-else if($_SESSION['opsys_client']=='9'){$client = "PR1-510";}
-else if($_SESSION['opsys_client']=='10'){$client = "RPT-555";}
-else if($_SESSION['opsys_client']=='11'){$client = "DW1-200";}
-else if($_SESSION['opsys_client']=='12'){$client = "QW1-300";}
-else if($_SESSION['opsys_client']=='13'){$client = "PW1-555";}
+  try {
+    $adldap = new adLDAP();
+  }
+  catch (adLDAPException $e) {
+    echo $e; 
+    exit();   
+  }
+  $adldap -> connect();
+    
+  $adldap -> authenticate($operator_adUser,$operator_adPassword);
+    //echo "yes";
+  $newpw =  $adldap -> generatePassword();
+  $messpw = "Your new password is \"".$newpw. "\"";
+   //var_dump($newpw);
+  // echo "eiei";
+    //exit();
+  $telnum = str_replace("-", "", $_SESSION['mobile']);
+ 
+   include "libraries/connect.php";
+      $sql_log_id = "SELECT * FROM log_web WHERE log_id='$_SESSION[log_id]'";
+      //echo $sql_log_id;
+      $query_log_id = mysql_query($sql_log_id);
+      $row_log_id = mysql_fetch_array($query_log_id);
+  
+    //Unlock account
+    if($_SESSION['user_purpose'] == 2){
+      // echo strtolower($_SESSION['user']);
+        if($adldap -> user_enable(strtolower($_SESSION['user']))){
+        // var_dump($adldap -> user_enable("wisanu.dis"));
+        // if($adldap -> user_enable("wisanu.dis")){
+           echo ("Unlock Success");
+          $sql_log = "UPDATE log_web SET Result = 'Success'";
+        $query_log = mysql_query($sql_log);
+        //$_SESSION['log_id'] = mysql_insert_id();
+        }
+        else{
+          echo "FAIL";
+        $sql_log = "UPDATE log_web SET Result = 'Fail'";
+        $query_log = mysql_query($sql_log);
+        //$_SESSION['log_id'] = mysql_insert_id();
+        // echo $sql_log;
+        }
+        // else
+          // echo "<br> Failwa";
+      // $adldap -> user_enable("wisanu.dis");
+    }
+    //Reset password
+    else{
+          $adldap -> user_enable(strtolower($_SESSION['user']));
+          if(setPassword("cpf","svr-tdc01",strtolower($_SESSION['user']),$newpw)){
+          // if(setPassword("cpf","svr-tdc01","wisanu.dis",$newpw)){
+              // echo "Success Krub.";
+            $sql_log = "UPDATE log_web SET Result = 'Success'";
+              $query_log = mysql_query($sql_log);
+             // $_SESSION['log_id'] = mysql_insert_id();
+              echo $newpw;
+          }
+      
+       
+            //echo "Yeah";
+          else{
+            echo "FAIL";
+            $sql_log = "UPDATE log_web SET Result = 'Fail'";
+            $query_log = mysql_query($sql_log);
+          }
+        $to = $_SESSION['email'];
+        $subject = 'Reset your Password';
+        $message = 'Your new password for account ' . $_SESSION['user'] . ' is "' . $newpw . '"';
+        $headers = 'From: adss@cpf.co.th' . "\r\n" .'X-Mailer: PHP/' . phpversion();
+        mail($to, $subject, $message, $headers);
+                  
+          sendSMS("CPF-ADSS",$telnum,$messpw);
+     
+    }
+   
 
-if($_SESSION['usertype']=='1'){$usertype="g";}
-else if($_SESSION['usertype']=='2'){$usertype="s";}
 
-if($_SESSION['user_purpose_ss']=='1'){$purpose="u";}
-else if($_SESSION['user_purpose_ss']=='2'){$purpose="s";}
 
-if($_SESSION['worktype']=='1'){$opsys="R3";}
-else if($_SESSION['worktype']=='2'){$opsys="BW";}
-$msgtime = date("Y-m-d H:i:s");
 
 ?>
 <? } ?>

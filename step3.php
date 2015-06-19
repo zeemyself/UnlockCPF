@@ -13,7 +13,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>SAP-CPFG Self Unlock/Reset Password</title>
+<title>CPF Self Unlock/Reset Password</title>
 <link href="css/sap.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/sap_ie.css" /><![endif]-->
 
@@ -90,20 +90,18 @@
 		}
 	function next(){
 		// Send the email or SMS
-		alert("Password send");
-		<?php
-			$to      = $_SESSION['email'];
-			$subject = 'Test repass';
-			$message = 'retsamtab hello';
-			$headers = 'From: adss@cpf.co.th' . "\r\n" .'Reply-To: swas.kun@cpmail.in.th' . "\r\n" .'X-Mailer: PHP/' . phpversion();
-			mail($to, $subject, $message, $headers);
-?>
+		document.repass.submit();
+		$("#loader").show();
+		return false;
 	}
+	
 </script>
 </head>
 <body>
 <?php
 	include "libraries/connect.php";
+	include ("libraries/cfg/cfg.inc.php");
+	include ("libraries/class/adLDAP.php");
 	$sql_trans_perday = "SELECT * FROM log_web WHERE User_Name_Ldap='$_SESSION[user]' AND Logon_Date='$_SESSION[todaydate]' AND Result='Success'";
 	//echo $sql_trans_perday;
 	$query_trans_perday = mysql_query($sql_trans_perday);
@@ -124,6 +122,12 @@
 			// $_SESSION['usertype'] = $usertype;
 			// $_SESSION['user_purpose_ss'] = $user_purpose;
 			$_SESSION['user_purpose']=$user_purpose;
+			if($user_purpose == 1){
+				$requirement = "Unlock";
+			}
+			else{
+				$requirement = "Reset";
+			}
 			// $_SESSION['worktype'] = $worktype;
 		//echo $user_purpose;
 			// if($usertype=='1'){ $User_Type = "User";}
@@ -137,28 +141,108 @@
 			//echo $sql_log_id;
 			$query_log_id = mysql_query($sql_log_id);
 			$row_log_id = mysql_fetch_array($query_log_id);
-			$Msg_response_fromdb = $row_log_id['Msg_response'];
+			echo $_SESSION['log_id'];
+			// $Msg_response_fromdb = $row_log_id['Msg_response'];
 			//echo $Msg_response_fromdb;
-			if($Msg_response_fromdb==""){
-				$sql_log = "UPDATE log_web SET User_Type='$User_Type', Requirement='$Requirement',System='$System'  WHERE log_id = '$_SESSION[log_id]'";
+			echo $requirement;
+			
+				$sql_log = "UPDATE log_web SET Requirement = '$requirement'";
 				$query_log = mysql_query($sql_log);
-			}else{
-				$sql_log = "INSERT INTO log_web(Logon_Date,Logon_Time,User_Name_Ldap,User_Type,Requirement,System) 
-							VALUES('$_SESSION[todaydate]','$_SESSION[timenow]','$_SESSION[username]','$User_Type','$Requirement','$System')";
-				$query_log = mysql_query($sql_log);
-				$_SESSION['log_id'] = mysql_insert_id();
-			}
-			//echo $sql_log;
-			$_SESSION['User_Type'] = $User_Type;
-			$_SESSION['Requirement'] = $Requirement;
-			$_SESSION['System'] = $System;
+				//$_SESSION['log_id'] = mysql_insert_id();
+			
+			echo $sql_log;
+			//$_SESSION['User_Type'] = $User_Type;
+			$_SESSION['requirement'] = $requirement;
+			//$_SESSION['System'] = $System;
 		}
+		//echo "<script type='text/javascript'>alert('$user_purpose');</script>";
+		if($user_purpose == 1){
+			echo "Are you sure to unlock account " . $_SESSION['user'];
+			//echo '<script> window.location="step4.php"; </script>';
+			
+
+		}
+
+	// Function Time
+
+
+	function connectAD(){
+			
+	try {
+		$adldap = new adLDAP();
+	}
+	catch (adLDAPException $e) {
+		echo $e; 
+		exit();   
+	}
+	$adldap -> connect();
+	$adldap -> authenticate("wisanu.sys","golf@339");
+		
+	}
+	function unlockAccount(){
+		
+		//include ("libraries/cfg/cfg.inc.php");
+		//include ("libraries/class/adLDAP.php");
+			$adldap -> user_enable($_SESSION['user']);
+			echo $_SESSION['user'];
+		
+
+	}
+	function sendMail(){
+		
+			$to      = $_SESSION['email'];
+			$subject = 'Reset your Password';
+			$message = 'A request to reset password was received your password is' . $newpw;
+			$headers = 'From: adss@cpf.co.th' . "\r\n" .'X-Mailer: PHP/' . phpversion();
+			mail($to, $subject, $message, $headers);
+
+	}
+	function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds'){
+		
+		$sets = array();
+		if(strpos($available_sets, 'l') !== false)
+			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
+		if(strpos($available_sets, 'u') !== false)
+			$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+		if(strpos($available_sets, 'd') !== false)
+			$sets[] = '23456789';
+		if(strpos($available_sets, 's') !== false)
+			$sets[] = '!@#$%&*?';
+
+		$all = '';
+		$password = '';
+		foreach($sets as $set)
+		{
+			$password .= $set[array_rand(str_split($set))];
+			$all .= $set;
+		}
+
+		$all = str_split($all);
+		for($i = 0; $i < $length - count($sets); $i++)
+			$password .= $all[array_rand($all)];
+
+		$password = str_shuffle($password);
+
+		if(!$add_dashes)
+			return $password;
+
+		$dash_len = floor(sqrt($length));
+		$dash_str = '';
+		while(strlen($password) > $dash_len)
+		{
+			$dash_str .= substr($password, 0, $dash_len) . '-';
+			$password = substr($password, $dash_len);
+		}
+		$dash_str .= $password;
+		return $dash_str;
+		
+	}
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
-      <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
-      <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
+      <div class="sap_logo" align="right"><img src="images/cpf_logo.png"  width="51" height="51" /></div>
+      <div class="sap_title"><img src="images/title2.png"/></div>
+      <div class="unlock_logo"><img src="images/cpfit.png" width="92" height="52" /></div>
      <!--  <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
      
     </div>
@@ -191,7 +275,8 @@
   		<td class="worksys">SMS</td>
   		<td width="104" align="center"><input type="radio" name="opsys_client" id="radio2" value="SMS" /><?echo $_SESSION['mobile']?></td>
   		<br> -->
-  		<div class="im-centered">
+  <form name="repass" id="repass" method="POST" action="step4.php">
+ <div class="im-centered">
 <!-- <div class="container" align ="center"> -->
 <div class="row">
     <div class="col-lg-12">
@@ -208,7 +293,7 @@
   	<div class="col-lg-12">
     <div class="input-group">
       <span class="input-group-addon">
-        <input type="checkbox" size ="20" aria-label="..." name = "type" checked>By SMS&nbsp</button>
+        <input type="checkbox" size ="20" aria-label="..." name = "type2" checked>By SMS&nbsp</button>
       </span>
       <input type="text" class="form-control" style="width:200px;"  placeholder="<?echo $_SESSION['mobile']?>" readonly>
       	
@@ -217,15 +302,15 @@
 </div><!-- /.row -->
 </div> <!-- Container -->	
   	<!-- </div> -->
-
+</form>
   	<div id="btn3">
                 <div class="cancel_sap"><a id="other_login"><img src="images/cancel_btn.png" border="0" width="118" height="44" style="cursor:pointer" /></a></div>
                 <div class="submit"><a onclick="javascript:next();"><img src="images/next_btn.png" width="118" height="44" border="0" style="cursor:pointer"/></a></div>
-            </div>
+    </div>
   	
    
   
-  <div id="footer3"><div class="copyright">Copyright @ 2013 by CPF</div></div>
+  <div id="footer3"><div class="copyright">Copyright @ 2015 by CPF</div></div>
 </div>
 <map name="Map" id="Map">
         <area shape="rect" coords="1,1,189,51" href="index.php" />

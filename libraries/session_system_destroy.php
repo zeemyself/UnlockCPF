@@ -1,9 +1,10 @@
 <?php
 session_start();
 include "connect.php";
-$sql_destroy = "UPDATE log_web SET Logout_status='Limited Logout' WHERE User_Name_Ldap = '$_SESSION[username]' AND Logon_Date='$_SESSION[todaydate]' AND Logon_Time='$_SESSION[timenow]'";
+$sql_destroy = "UPDATE log_web SET Logout_status='Self Logout' WHERE User_Name_Ldap = '$_SESSION[username]' AND Logon_Date='$_SESSION[todaydate]' AND Logon_Time='$_SESSION[timenow]'";
 mysql_query($sql_destroy);
-echo $sql_destroy;
+//echo $sql_destroy;
+session_unregister("user_purpose");
 session_unregister("login");
 session_unregister("needLogin");
 session_unregister("user");
@@ -16,9 +17,9 @@ session_unregister("lastname");
 session_unregister("telephone");
 session_unregister("mobile");
 session_unregister("title");
-session_unregister("department");
-session_unregister("company");
-session_unregister("mail");
+session_unregister("birthdate");
+session_unregister("mobile");
+session_unregister("email");
 session_unregister("log_id");
 session_unregister("timenow");
 session_unregister("todaydate");
@@ -30,5 +31,5 @@ session_unregister("Client");
 session_unregister("message");
 session_unregister("msgtype");
 session_destroy();
-echo  "<script>window.location='../index.php'</script>";
+echo  "<script>window.location='../welcome.php'</script>";
 ?>

@@ -10,7 +10,7 @@ echo "<script>window.location='index.php'</script>";
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>SAP-CPFG Self Unlock/Reset Password</title>
+<title>CPF Self Unlock/Reset Password</title>
 <link href="css/sap.css" rel="stylesheet" type="text/css" />
 <!--[if gte IE 6]><link rel="stylesheet" type="text/css" href="css/sap_ie.css" /><![endif]-->
 <script type="text/javascript" src="fancybox/jquery-1.9.0.min.js"></script>
@@ -100,6 +100,7 @@ echo "<script>window.location='index.php'</script>";
 <body>
 <?php
 	include "libraries/connect.php";
+
 	$sql_trans_perday = "SELECT * FROM log_web WHERE User_Name_Ldap='$_SESSION[user]' AND Logon_Date='$_SESSION[todaydate]' AND Result='Success'";
 	$query_trans_perday = mysql_query($sql_trans_perday);
 	$trans_perday = mysql_num_rows($query_trans_perday);
@@ -108,17 +109,18 @@ echo "<script>window.location='index.php'</script>";
 		echo "<script>alert('สามารถเข้าใช้งานโปรแกรมได้ 2 ครั้ง/วัน'); window.location.href='libraries/session_system_destroy.php';</script>";
 	}
 	else{
+		echo $_SESSION['log_id'];
 ?>
 <div id="container">
 	<div id="header">
-      <div class="sap_logo" align="right"><img src="images/cpf_logo.png" width="51" height="51" /></div>
-      <div class="sap_title"><img src="images/sap_title.png" width="577" height="36" /></div>
-      <div class="unlock_logo"><img src="images/unlock_logo.png" width="37" height="36" /></div>
+      <div class="sap_logo" align="right"><img src="images/cpf_logo.png"  width="51" height="51" /></div>
+      <div class="sap_title"><a href="libraries/session_system_destroy.php"><img src="images/title2.png"/></a></div>
+      <div class="unlock_logo"><img src="images/cpfit.png" width="92" height="52" /></div>
       <!-- <div class="cpf_logo"><img src="images/cpf_logo.png" width="51" height="51" /></div> -->
      
     </div>
     <div class="header_bar"></div>
-    <div id="nav"><img src="images/nav2_over.png" width="835" height="46" usemap="#Map" border="0" />
+    <div id="nav"><img src="images/nav3_over.png" width="835" height="46" usemap="#Map" border="0" />
 	<div id="loader" style="display:none;position:relative; padding-left:850px; margin-top:-40px"><img src="images/preloader.gif" width="35" height="35" border="0"></div>
     </div>
     <div class="nav_line">
@@ -143,34 +145,32 @@ echo "<script>window.location='index.php'</script>";
           </tr>
           <tr>
             <td colspan="6" height="4" style="background-image:url(images/line.png); background-repeat:no-repeat"></td>
-           --></tr>
+           </tr>-->
           <tr>
           	<td height="80">&nbsp;</td>
-            <td class="usertype">ระบุความต้องการ</td>
-            <td><input name="user_purpose"  type="radio" value="1" <? if($_SESSION['user_purpose_ss']=='1'){echo "checked";} ?> /></td>
+          	<?if($_SESSION['user_purpose'] == 2){
+          	?>
+            <td class="usertype">Are you sure want to unlock this account (<?=$_SESSION['user']?>)</td>
+            <?
+        	}
+        	else{
+        	?>
+        	<td class="usertype">New password for <?=$_SESSION['user']?> will send to <?=$_SESSION['mobile']?> and <?=$_SESSION['email']?></td>
+        	<? } ?>
+           <!--  <td><input name="user_purpose"  type="radio" value="1" <? if($_SESSION['user_purpose_ss']=='1'){echo "checked";} ?> /></td>
             <td  class="usertype2">ขอปลดล็อครหัสผ่าน</td>
             <td><input name="user_purpose" type="radio" value="2" <? if($_SESSION['user_purpose_ss']=='2'){echo "checked";} ?>/></td>
-            <td  class="usertype2">ขอรหัสผ่านใหม่</td>
+            <td  class="usertype2">ขอรหัสผ่านใหม่</td> -->
           </tr>
-         <!--  <tr>
-            <td colspan="6" height="4" style="background-image:url(images/line.png); background-repeat:no-repeat"></td>
-          </tr>
-          <tr>
-          	<td height="80" align="right">&nbsp;</td>
-            <td class="usertype">ระบุระบบงาน</td>
-            <td><input name="worktype" type="radio" value="1" <? if($_SESSION['worktype']=='1'){echo "checked";} ?>/></td>
-            <td  class="usertype2">ระบบ SAP-ECC6</td>
-            <td><input name="worktype" type="radio" value="2" <? if($_SESSION['worktype']=='2'){echo "checked";} ?>/></td>
-            <td  class="usertype2">ระบบ SAP BW</td>
-          </tr> -->
+         
         </table>
     </form>
     	<div id="btn2">
             <div class="cancel"><a id="other_login"><img src="images/cancel_btn.png" border="0" width="118" height="44" style="cursor:pointer" /></a></div>
-            <div class="submit"><a onclick="javascript:IsEmpty();"><img src="images/next_btn.png" width="118" height="44" border="0" style="cursor:pointer" /></a></div>
+            <div class="submit"><a href="step4.php"><img src="images/next_btn.png" width="118" height="44" border="0" style="cursor:pointer" /></a></div>
         </div>
   	</div>
-  <div id="footer"><div class="copyright">Copyright @ 2013 by CPF</div></div>
+  <div id="footer"><div class="copyright">Copyright @ 2015 by CPF</div></div>
 </div>
 <map name="Map" id="Map">
         <area shape="rect" coords="1,1,189,51" href="index.php" />

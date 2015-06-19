@@ -1,0 +1,1 @@
+npfeed /F:TAS /D:TAS_Line_Manager /T:"test from dev" >> .\log\sms.log 2>&1
